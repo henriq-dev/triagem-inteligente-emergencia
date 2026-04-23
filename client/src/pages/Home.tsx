@@ -34,11 +34,7 @@ export default function Home() {
               Redução de filas através de automação e priorização por urgência
             </p>
 
-            <div className="pt-4">
-              <p className="text-sm text-green-600 font-mono font-bold mb-4">
-                ✓ Acesso direto sem login - Modo Demo
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
