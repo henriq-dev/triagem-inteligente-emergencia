@@ -36,15 +36,21 @@
 - [x] Criar indicadores visuais de redução de filas
 - [x] Implementar dashboard de métricas gerais
 
-## Fase 6: Testes e Entrega
+## Fase 6: Remover Autenticação Obrigatória
+- [x] Remover proteção de rotas (ProtectedRoute)
+- [x] Criar modo demo com usuário padrão
+- [x] Permitir acesso direto a todas as funcionalidades
+- [x] Manter histórico de sessão durante uso
+
+## Fase 7: Testes e Entrega
 - [x] Escrever testes de backend para APIs (11 testes passando)
 - [x] Escrever testes do algoritmo de urgência (19 testes passando)
 - [x] Testar fluxo completo de check-in até atendimento
 - [x] Testar atualização em tempo real da fila
 - [x] Testar painel administrativo
 - [x] Otimizar performance
-- [ ] Criar checkpoint final
-- [ ] Entregar sistema ao usuário
+- [x] Criar checkpoint final
+- [x] Entregar sistema ao usuário
 
 ## Notas
 - Classificações de urgência: crítico, urgente, pouco urgente, não urgente

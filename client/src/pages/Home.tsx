@@ -1,24 +1,9 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "wouter";
-import { getLoginUrl } from "@/const";
-import { Activity, BarChart3, ClipboardList, LogIn } from "lucide-react";
+import { Activity, BarChart3, ClipboardList, History } from "lucide-react";
 
 export default function Home() {
-  const { user, isAuthenticated, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 font-mono">Carregando...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       {/* Hero Section */}
@@ -49,23 +34,18 @@ export default function Home() {
               Redução de filas através de automação e priorização por urgência
             </p>
 
-            {!isAuthenticated ? (
-              <div className="pt-4">
-                <a href={getLoginUrl()}>
-                  <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Fazer Login
-                  </Button>
-                </a>
-              </div>
-            ) : null}
+            <div className="pt-4">
+              <p className="text-sm text-green-600 font-mono font-bold mb-4">
+                ✓ Acesso direto sem login - Modo Demo
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Check-in Card */}
           <Card className="border-2 border-cyan-300 hover:shadow-lg transition-shadow">
             <CardHeader>
@@ -81,17 +61,11 @@ export default function Home() {
               <p className="text-sm text-gray-600">
                 Pacientes inserem dados de sensores simulados: frequência cardíaca, pressão arterial, temperatura, saturação de oxigênio e nível de dor.
               </p>
-              {isAuthenticated ? (
-                <Link href="/check-in">
-                  <Button variant="outline" className="w-full">
-                    Acessar Check-in
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="outline" className="w-full" disabled>
-                  Faça login para acessar
+              <Link href="/check-in">
+                <Button variant="outline" className="w-full">
+                  Acessar Check-in
                 </Button>
-              )}
+              </Link>
             </CardContent>
           </Card>
 
@@ -110,17 +84,11 @@ export default function Home() {
               <p className="text-sm text-gray-600">
                 Visualize a fila de pacientes ordenada por urgência, tempo estimado de espera e métricas de redução de filas.
               </p>
-              {isAuthenticated ? (
-                <Link href="/dashboard">
-                  <Button variant="outline" className="w-full">
-                    Acessar Dashboard
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="outline" className="w-full" disabled>
-                  Faça login para acessar
+              <Link href="/dashboard">
+                <Button variant="outline" className="w-full">
+                  Acessar Dashboard
                 </Button>
-              )}
+              </Link>
             </CardContent>
           </Card>
 
@@ -139,17 +107,34 @@ export default function Home() {
               <p className="text-sm text-gray-600">
                 Médicos e triadores gerenciam o status dos pacientes, atualizam informações e acompanham histórico de atendimentos.
               </p>
-              {isAuthenticated ? (
-                <Link href="/admin">
-                  <Button variant="outline" className="w-full">
-                    Acessar Admin
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="outline" className="w-full" disabled>
-                  Faça login para acessar
+              <Link href="/admin">
+                <Button variant="outline" className="w-full">
+                  Acessar Admin
                 </Button>
-              )}
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* History Card */}
+          <Card className="border-2 border-purple-300 hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                <History className="w-6 h-6 text-purple-600" />
+              </div>
+              <CardTitle>Histórico</CardTitle>
+              <CardDescription className="font-mono text-xs">
+                Registro de atendimentos
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-gray-600">
+                Visualize o histórico completo de atendimentos com tempos de espera, urgência e desfecho de cada paciente.
+              </p>
+              <Link href="/history">
+                <Button variant="outline" className="w-full">
+                  Acessar Histórico
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>

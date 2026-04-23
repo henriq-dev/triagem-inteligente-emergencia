@@ -8,33 +8,16 @@ import Home from "./pages/Home";
 import CheckIn from "./pages/CheckIn";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import History from "./pages/History";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/check-in"}>
-        {() => (
-          <ProtectedRoute>
-            <CheckIn />
-          </ProtectedRoute>
-        )}
-      </Route>
-      <Route path={"/dashboard"}>
-        {() => (
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        )}
-      </Route>
-      <Route path={"/admin"}>
-        {() => (
-          <ProtectedRoute requiredRoles={["doctor", "triager", "admin"]}>
-            <Admin />
-          </ProtectedRoute>
-        )}
-      </Route>
+      <Route path={"/check-in"} component={CheckIn} />
+      <Route path={"/dashboard"} component={Dashboard} />
+      <Route path={"/admin"} component={Admin} />
+      <Route path={"/history"} component={History} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
