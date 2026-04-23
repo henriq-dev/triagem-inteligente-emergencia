@@ -159,9 +159,9 @@ const triagemRouter = router({
     }),
 
   /**
-   * Update patient status (admin only)
+   * Update patient status (public)
    */
-  updateStatus: protectedProcedure
+  updateStatus: publicProcedure
     .input(
       z.object({
         patientId: z.number(),
@@ -169,10 +169,6 @@ const triagemRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Verify user is doctor or triager
-      if (!["doctor", "triager", "admin"].includes(ctx.user.role)) {
-        throw new Error("Acesso negado");
-      }
 
       const now = new Date();
       let attendanceStartTime: Date | undefined;
@@ -216,7 +212,7 @@ const triagemRouter = router({
             waitingTimeMinutes,
             attendanceTimeMinutes,
             outcome: "atendido",
-            attendingDoctor: ctx.user.name || "Não especificado",
+            attendingDoctor: ctx.user?.name || "Não especificado",
           });
         }
       }

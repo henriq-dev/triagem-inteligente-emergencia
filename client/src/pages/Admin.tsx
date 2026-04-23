@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
-import { useAuth } from "@/_core/hooks/useAuth";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +30,6 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 export default function Admin() {
-  const { user } = useAuth();
   const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
   const [newStatus, setNewStatus] = useState<string>("");
 
@@ -61,25 +60,6 @@ export default function Admin() {
   const attending = attendingQuery.data || [];
   const patient = patientQuery.data;
   const history = historyQuery.data || [];
-
-  // Check authorization
-  if (!user || !["doctor", "triager", "admin"].includes(user.role)) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 p-4 flex items-center justify-center">
-        <Card className="border-2 border-red-300 bg-red-50">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <AlertCircle className="w-6 h-6 text-red-600" />
-              <div>
-                <p className="font-bold text-red-900">Acesso Negado</p>
-                <p className="text-sm text-red-700">Você não tem permissão para acessar este painel.</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   const handleUpdateStatus = () => {
     if (!selectedPatientId || !newStatus) {
